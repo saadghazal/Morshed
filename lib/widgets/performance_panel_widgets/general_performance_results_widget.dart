@@ -204,11 +204,11 @@ class _GeneralPerformanceResultsWidgetState extends State<GeneralPerformanceResu
                     icon: 'images/avg_icon.svg',
                     opacity: opacity1,
                     screenType: screenType,
-                    iconHeight: screenType == ScreenType.desktop ? 32 : 28,
-                    iconWidth: screenType == ScreenType.desktop ? 32 : 28,
+                    iconHeight: 28,
+                    iconWidth: 28,
                     result: AppTexts.titleMedium(
                       text: '87%',
-                      fontSize: screenType == ScreenType.desktop ? 34 : 30,
+                      fontSize: screenType == ScreenType.mobile ? 22 : 34,
                     ),
                     backgroundColor: AppColors.purple50,
                     unselectedBorderColor: AppColors.purple200,
@@ -219,18 +219,18 @@ class _GeneralPerformanceResultsWidgetState extends State<GeneralPerformanceResu
                   ),
                   // Spacer(),
                   SizedBox(
-                    width: AppDimensions.w20,
+                    width: 12,
                   ),
                   resultWidget(
                     opacity: opacity2,
                     screenType: screenType,
                     icon: 'images/blue_avg_icon.svg',
                     headline: 'عدد الأسئلة المحلولة',
-                    iconHeight: screenType == ScreenType.desktop ? 32 : 28,
-                    iconWidth: screenType == ScreenType.desktop ? 32 : 28,
+                    iconHeight: 28,
+                    iconWidth: 28,
                     result: AppTexts.titleMedium(
                       text: '30',
-                      fontSize: screenType == ScreenType.desktop ? 34 : 30,
+                      fontSize: screenType == ScreenType.mobile ? 22 : 34,
                     ),
                     backgroundColor: AppColors.blue50,
                     unselectedBorderColor: AppColors.blue200,
@@ -242,7 +242,7 @@ class _GeneralPerformanceResultsWidgetState extends State<GeneralPerformanceResu
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 12,
               ),
               Row(
                 children: [
@@ -251,43 +251,81 @@ class _GeneralPerformanceResultsWidgetState extends State<GeneralPerformanceResu
                     screenType: screenType,
                     icon: 'images/qa_icon.svg',
                     headline: 'عدد الأسئلة في خاصية س/ج',
-                    iconHeight: screenType == ScreenType.desktop ? 32 : 28,
-                    iconWidth: screenType == ScreenType.desktop ? 32 : 28,
+                    iconHeight: 28,
+                    iconWidth: 28,
                     result: Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              AppTexts.titleMedium(
-                                text: '7',
-                                fontSize: screenType == ScreenType.desktop ? 34 : 30,
-                              ),
-                              AppTexts.bodyRegular(
-                                text: 'المضافة',
-                                fontSize: screenType == ScreenType.desktop ? 14 : 12,
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              AppTexts.titleMedium(
-                                text: '5',
-                                fontSize: screenType == ScreenType.desktop ? 34 : 30,
-                              ),
-                              AppTexts.bodyRegular(
-                                text: 'تم إجابتها',
-                                fontSize: screenType == ScreenType.desktop ? 14 : 12,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      child: screenType == ScreenType.mobile
+                          ? Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    AppTexts.titleMedium(
+                                      text: '7',
+                                      fontSize: 22,
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    AppTexts.bodyRegular(
+                                      text: 'المضافة',
+                                      fontSize: 13,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    AppTexts.titleMedium(
+                                      text: '5',
+                                      fontSize: 22,
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    AppTexts.bodyRegular(
+                                      text: 'تم إجابتها',
+                                      fontSize: 13,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
+                          : Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    AppTexts.titleMedium(
+                                      text: '7',
+                                      fontSize: 34,
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    AppTexts.bodyRegular(
+                                      text: 'المضافة',
+                                      fontSize: 14,
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    AppTexts.titleMedium(
+                                      text: '5',
+                                      fontSize: 34,
+                                    ),
+                                    AppTexts.bodyRegular(
+                                      text: 'تم إجابتها',
+                                      fontSize: 14,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                     ),
                     backgroundColor: AppColors.green50,
                     unselectedBorderColor: AppColors.green200,
@@ -298,18 +336,18 @@ class _GeneralPerformanceResultsWidgetState extends State<GeneralPerformanceResu
                   ),
                   // Spacer(),
                   SizedBox(
-                    width: AppDimensions.w20,
+                    width: 12,
                   ),
                   resultWidget(
                     opacity: opacity4,
                     screenType: screenType,
                     icon: 'images/wrong_icon.svg',
                     headline: 'الأخطاء السابقة المتبقية',
-                    iconHeight: screenType == ScreenType.desktop ? 32 : 28,
-                    iconWidth: screenType == ScreenType.desktop ? 32 : 28,
+                    iconHeight: 28,
+                    iconWidth: 28,
                     result: AppTexts.titleMedium(
                       text: '11',
-                      fontSize: screenType == ScreenType.desktop ? 34 : 30,
+                      fontSize: screenType == ScreenType.mobile ? 22 : 34,
                     ),
                     backgroundColor: AppColors.red50,
                     unselectedBorderColor: AppColors.red200,
@@ -346,10 +384,10 @@ class _GeneralPerformanceResultsWidgetState extends State<GeneralPerformanceResu
           opacity: opacity,
           duration: Duration(milliseconds: 400),
           child: Container(
-            height: 165,
+            height: screenType == ScreenType.mobile ? 183 : 165,
             padding: EdgeInsets.only(
-              top: 2.5.h,
-              right: 1.6.w,
+              top: screenType == ScreenType.mobile ? 12 : 20,
+              right: screenType == ScreenType.mobile ? 12 : 20,
             ),
             decoration: BoxDecoration(
               border: isSelected
@@ -397,17 +435,17 @@ class _GeneralPerformanceResultsWidgetState extends State<GeneralPerformanceResu
                   ],
                 ),
                 SizedBox(
-                  height: 0.98.h,
+                  height: 10,
                 ),
                 Flexible(
                   child: AppTexts.bodyMedium(
                     text: headline,
                     fontColor: AppColors.slate900,
-                    fontSize: screenType == ScreenType.desktop ? 16 : 14,
+                    fontSize: 16,
                   ),
                 ),
                 SizedBox(
-                  height: 1.96.h,
+                  height: 16,
                 ),
                 result,
               ],

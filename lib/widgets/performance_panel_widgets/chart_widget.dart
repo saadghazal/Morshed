@@ -72,7 +72,10 @@ class _ChartWidgetState extends State<ChartWidget> {
                 LineChartData(
                   clipData: FlClipData.all(),
                   minX: minX,
-                  maxX: maxX,
+                  maxX: state.screenType == ScreenType.mobile ||
+                          state.screenType == ScreenType.miniTablet
+                      ? 2
+                      : maxX,
                   minY: 0,
                   maxY: 100,
                   gridData: FlGridData(
@@ -162,19 +165,37 @@ class _ChartWidgetState extends State<ChartWidget> {
                         dxSwiping = event.details.delta.dx;
                       }
                       if (event is FlPanEndEvent) {
-                        if (dxSwiping > 0) {
-                          if (minX - 5 < 0) {
-                            return;
+                        if (state.screenType == ScreenType.mobile ||
+                            state.screenType == ScreenType.miniTablet) {
+                          if (dxSwiping > 0) {
+                            if (minX - 3 < 0) {
+                              return;
+                            }
+                            setState(() {
+                              minX = minX - 3;
+                              maxX -= 3;
+                            });
+                          } else {
+                            setState(() {
+                              minX = maxX;
+                              maxX += 3;
+                            });
                           }
-                          setState(() {
-                            minX = minX - 5;
-                            maxX -= 5;
-                          });
                         } else {
-                          setState(() {
-                            minX = maxX;
-                            maxX += 5;
-                          });
+                          if (dxSwiping > 0) {
+                            if (minX - 5 < 0) {
+                              return;
+                            }
+                            setState(() {
+                              minX = minX - 5;
+                              maxX -= 5;
+                            });
+                          } else {
+                            setState(() {
+                              minX = maxX;
+                              maxX += 5;
+                            });
+                          }
                         }
                       }
                     },

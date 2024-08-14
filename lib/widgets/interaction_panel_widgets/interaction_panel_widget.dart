@@ -27,6 +27,8 @@ class InteractionPanelWidget extends StatelessWidget {
         children: [
           AppTexts.titleBold(
             text: 'لوحة التفاعل',
+            fontSize:
+                screenType == ScreenType.mobile || screenType == ScreenType.miniTablet ? 20 : 28,
           ),
           const SizedBox(
             height: 4,
@@ -37,6 +39,9 @@ class InteractionPanelWidget extends StatelessWidget {
                 child: AppTexts.bodyRegular(
                   text: 'لأخر 10 أيام:',
                   fontColor: AppColors.slate400,
+                  fontSize: screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                      ? 14
+                      : 16,
                 ),
               ),
               SizedBox(
@@ -45,6 +50,9 @@ class InteractionPanelWidget extends StatelessWidget {
               AppTexts.bodyRegular(
                 text: '2024-03-28 إلى 06-04-2024',
                 fontColor: AppColors.blue600,
+                fontSize: screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                    ? 14
+                    : 16,
               ),
             ],
           ),

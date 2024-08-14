@@ -38,7 +38,11 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenType == ScreenType.desktop ? 20 : 15),
-            child: AppTexts.titleBold(text: 'الجداول الأسبوعية'),
+            child: AppTexts.titleBold(
+              text: 'الجداول الأسبوعية',
+              fontSize:
+                  screenType == ScreenType.mobile || screenType == ScreenType.miniTablet ? 20 : 28,
+            ),
           ),
           SizedBox(
             height: 40,
@@ -54,7 +58,9 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                   child: AppTexts.bodyRegular(
                     text: 'رقم الأسبوع',
                     fontColor: AppColors.slate500,
-                    fontSize: 14,
+                    fontSize: screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                        ? 12
+                        : 14,
                   ),
                 ),
                 Flexible(
@@ -64,7 +70,10 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                     child: AppTexts.bodyRegular(
                       text: 'التاريخ',
                       fontColor: AppColors.slate500,
-                      fontSize: 14,
+                      fontSize:
+                          screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                              ? 12
+                              : 14,
                     ),
                   ),
                 ),
@@ -75,7 +84,10 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                     child: AppTexts.bodyRegular(
                       text: 'التقدم',
                       fontColor: AppColors.slate500,
-                      fontSize: 14,
+                      fontSize:
+                          screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                              ? 12
+                              : 14,
                     ),
                   ),
                 ),
@@ -143,20 +155,22 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
             height: 20,
           ),
           Builder(builder: (context) {
-            if (screenType == ScreenType.mobile || screenType == ScreenType.miniTablet) {
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional.topStart,
-                      child: AppTexts.bodyRegular(text: 'النتائج: 1 - 7 من 40'),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(alignment: Alignment.center, child: resultsPagesWidget(screenType))
-                  ],
+            if (screenType == ScreenType.mobile ||
+                screenType == ScreenType.miniTablet ||
+                screenType == ScreenType.smallTablet) {
+              return SizedBox(
+                width: double.maxFinite,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      Align(alignment: Alignment.center, child: resultsPagesWidget(screenType)),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      AppTexts.bodyRegular(text: 'النتائج: 1 - 7 من 40'),
+                    ],
+                  ),
                 ),
               );
             }
@@ -181,6 +195,7 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
   Row resultsPagesWidget(ScreenType screenType) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         RotatedBox(
           quarterTurns: 2,
@@ -188,10 +203,8 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
             onTap: () {},
             child: SvgPicture.asset(
               'images/forward_courses_list.svg',
-              height:
-                  screenType == ScreenType.smallTablet || screenType == ScreenType.mobile ? 30 : 40,
-              width:
-                  screenType == ScreenType.smallTablet || screenType == ScreenType.mobile ? 30 : 40,
+              height: 40,
+              width: 40,
             ),
           ),
         ),
@@ -204,12 +217,8 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
             (index) {
               if (index == length - 1) {
                 return Container(
-                  height: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                      ? 30
-                      : 40,
-                  width: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                      ? 30
-                      : 40,
+                  height: 40,
+                  width: 40,
                   margin: EdgeInsets.only(left: 12),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -220,21 +229,14 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                     child: AppTexts.bodyRegular(
                       text: '${index + 1}',
                       fontColor: AppColors.slate900,
-                      fontSize:
-                          screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                              ? 14
-                              : 16,
+                      fontSize: 16,
                     ),
                   ),
                 );
               } else if (index == length - 3) {
                 return Container(
-                  height: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                      ? 30
-                      : 40,
-                  width: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                      ? 30
-                      : 40,
+                  height: 40,
+                  width: 40,
                   margin: EdgeInsets.only(left: 8),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -245,10 +247,7 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                     child: AppTexts.bodyRegular(
                       text: '....',
                       fontColor: AppColors.slate900,
-                      fontSize:
-                          screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                              ? 14
-                              : 16,
+                      fontSize: 16,
                     ),
                   ),
                 );
@@ -256,12 +255,8 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                 return SizedBox();
               }
               return Container(
-                height: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                    ? 30
-                    : 40,
-                width: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                    ? 30
-                    : 40,
+                height: 40,
+                width: 40,
                 margin: EdgeInsets.only(left: 8),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -274,10 +269,7 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                   child: AppTexts.bodyRegular(
                     text: '${index + 1}',
                     fontColor: AppColors.slate900,
-                    fontSize:
-                        screenType == ScreenType.smallTablet || screenType == ScreenType.mobile
-                            ? 14
-                            : 16,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -286,8 +278,8 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
         ),
         SvgPicture.asset(
           'images/forward_courses_list.svg',
-          height: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile ? 30 : 40,
-          width: screenType == ScreenType.smallTablet || screenType == ScreenType.mobile ? 30 : 40,
+          height: 40,
+          width: 40,
         )
       ],
     );

@@ -110,25 +110,53 @@ class _WeekSlotState extends State<WeekSlot> with TickerProviderStateMixin {
         right: 20,
       ),
       color: isClicked ? AppColors.blue50 : Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flex(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            direction: Axis.horizontal,
-            children: [
-              SizedBox(
-                width: 13.333.w,
-                child: screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
-                    ? IntrinsicHeight(
-                        child: Column(
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Flex(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              direction: Axis.horizontal,
+              children: [
+                SizedBox(
+                  width: 13.333.w,
+                  child: screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                      ? Visibility(
+                          visible: isClicked,
+                          replacement: AppTexts.bodyMedium(
+                            text: widget.weekNumber,
+                            fontColor: isClicked ? AppColors.blue600 : AppColors.slate900,
+                            fontSize: 16,
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: isClicked ? AppColors.yellow400 : Colors.transparent,
+                                ),
+                                child: Center(
+                                  child: AppTexts.bodyMedium(
+                                    text: widget.weekNumber,
+                                    fontColor: isClicked ? AppColors.blue600 : AppColors.slate900,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AppTexts.bodyMedium(
                               text: widget.weekNumber,
                               fontColor: isClicked ? AppColors.blue600 : AppColors.slate900,
-                              fontSize: 14,
+                              fontSize: 18,
                             ),
                             Visibility(
                               visible: isClicked,
@@ -136,8 +164,9 @@ class _WeekSlotState extends State<WeekSlot> with TickerProviderStateMixin {
                               child: Flexible(
                                 child: IntrinsicWidth(
                                   child: Container(
+                                    margin: EdgeInsets.only(right: 17),
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: 4,
+                                      horizontal: screenType == ScreenType.desktop ? 12 : 8,
                                       vertical: 3,
                                     ),
                                     decoration: BoxDecoration(
@@ -148,7 +177,7 @@ class _WeekSlotState extends State<WeekSlot> with TickerProviderStateMixin {
                                       child: AppTexts.bodyRegular(
                                         text: 'الأسبوع الحالي',
                                         fontColor: AppColors.slate900,
-                                        fontSize: 12,
+                                        fontSize: screenType == ScreenType.desktop ? 16 : 14,
                                       ),
                                     ),
                                   ),
@@ -157,212 +186,132 @@ class _WeekSlotState extends State<WeekSlot> with TickerProviderStateMixin {
                             ),
                           ],
                         ),
-                      )
-                    : Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppTexts.bodyMedium(
-                            text: widget.weekNumber,
-                            fontColor: isClicked ? AppColors.blue600 : AppColors.slate900,
-                            fontSize: screenType == ScreenType.desktop
-                                ? 18
-                                : screenType == ScreenType.largeTablet ||
-                                        screenType == ScreenType.smallTablet
-                                    ? 16
-                                    : 14,
+                ),
+                Flexible(
+                  // flex: 6,
+                  fit: FlexFit.tight,
+                  child: SizedBox(
+                    width: 19.93.w,
+                    child: AppTexts.bodyMedium(
+                      text: widget.weekDate,
+                      fontColor: isClicked ? AppColors.blue600 : AppColors.slate900,
+                      fontSize: screenType == ScreenType.desktop
+                          ? 18
+                          : screenType == ScreenType.largeTablet ||
+                                  screenType == ScreenType.smallTablet
+                              ? 16
+                              : 14,
+                      textOverflow: TextOverflow.clip,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: LinearPercentIndicator(
+                            percent: widget.weekProgress / 100,
+                            lineHeight: 4,
+                            progressColor: AppColors.blue600,
+                            backgroundColor: AppColors.slate200,
+                            isRTL: true,
+                            barRadius: const Radius.circular(9),
                           ),
-                          Visibility(
-                            visible: isClicked,
-                            replacement: SizedBox(),
-                            child: Flexible(
-                              child: IntrinsicWidth(
-                                child: Container(
-                                  margin: EdgeInsets.only(right: 17),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: screenType == ScreenType.desktop
-                                        ? 12
-                                        : screenType == ScreenType.largeTablet ||
-                                                screenType == ScreenType.smallTablet
-                                            ? 8
-                                            : 4,
-                                    vertical: 3,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(22),
-                                    color: AppColors.yellow400,
-                                  ),
-                                  child: Center(
-                                    child: AppTexts.bodyRegular(
-                                      text: 'الأسبوع الحالي',
-                                      fontColor: AppColors.slate900,
-                                      fontSize: screenType == ScreenType.desktop
-                                          ? 16
-                                          : screenType == ScreenType.largeTablet ||
-                                                  screenType == ScreenType.smallTablet
-                                              ? 14
-                                              : 12,
+                        ),
+                        SizedBox(
+                          width: 0.63.w,
+                        ),
+                        AppTexts.bodyRegular(
+                          text: '${widget.weekProgress}%',
+                          fontColor: AppColors.slate900,
+                          fontSize: screenType == ScreenType.desktop ? 16 : 14,
+                        ),
+                        Spacer(),
+                        InkWell(
+                          onTap: clickOnWeek,
+                          child: isClicked
+                              ? Ink(
+                                  child: RotatedBox(
+                                    quarterTurns: 2,
+                                    child: SvgPicture.asset(
+                                      'images/Down.svg',
+                                      color: AppColors.slate400,
+                                      height: screenType == ScreenType.smallTablet ||
+                                              screenType == ScreenType.mobile ||
+                                              screenType == ScreenType.miniTablet
+                                          ? 20
+                                          : 24,
+                                      width: screenType == ScreenType.smallTablet ||
+                                              screenType == ScreenType.mobile ||
+                                              screenType == ScreenType.miniTablet
+                                          ? 20
+                                          : 24,
                                     ),
                                   ),
+                                )
+                              : SvgPicture.asset(
+                                  'images/Down.svg',
+                                  color: AppColors.slate400,
+                                  height: screenType == ScreenType.smallTablet ||
+                                          screenType == ScreenType.mobile ||
+                                          screenType == ScreenType.miniTablet
+                                      ? 20
+                                      : 24,
+                                  width: screenType == ScreenType.smallTablet ||
+                                          screenType == ScreenType.mobile ||
+                                          screenType == ScreenType.miniTablet
+                                      ? 20
+                                      : 24,
                                 ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-              ),
-              Flexible(
-                // flex: 6,
-                fit: FlexFit.tight,
-                child: SizedBox(
-                  width: 19.93.w,
-                  child: AppTexts.bodyMedium(
-                    text: widget.weekDate,
-                    fontColor: isClicked ? AppColors.blue600 : AppColors.slate900,
-                    fontSize: screenType == ScreenType.desktop
-                        ? 18
-                        : screenType == ScreenType.largeTablet ||
-                                screenType == ScreenType.smallTablet
-                            ? 16
-                            : 14,
-                    textOverflow: TextOverflow.clip,
-                  ),
-                ),
-              ),
-              Flexible(
-                // flex: 4,
-                // fit: FlexFit.tight,
-                child: SizedBox(
-                  // width: double.maxFinite,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        flex: 2,
-                        child: LinearPercentIndicator(
-                          percent: widget.weekProgress / 100,
-                          lineHeight: 4,
-                          progressColor: AppColors.blue600,
-                          backgroundColor: AppColors.slate200,
-                          isRTL: true,
-                          barRadius: const Radius.circular(9),
                         ),
-                      ),
-                      SizedBox(
-                        width: 0.63.w,
-                      ),
-                      AppTexts.bodyRegular(
-                        text: '${widget.weekProgress}%',
-                        fontColor: AppColors.slate900,
-                        fontSize: screenType == ScreenType.desktop ? 16 : 14,
-                      ),
-                      Spacer(),
-                      InkWell(
-                        onTap: clickOnWeek,
-                        child: isClicked
-                            ? Ink(
-                                child: RotatedBox(
-                                  quarterTurns: 2,
-                                  child: SvgPicture.asset(
-                                    'images/Down.svg',
-                                    color: AppColors.slate400,
-                                    height: screenType == ScreenType.smallTablet ||
-                                            screenType == ScreenType.mobile ||
-                                            screenType == ScreenType.miniTablet
-                                        ? 20
-                                        : 24,
-                                    width: screenType == ScreenType.smallTablet ||
-                                            screenType == ScreenType.mobile ||
-                                            screenType == ScreenType.miniTablet
-                                        ? 20
-                                        : 24,
-                                  ),
-                                ),
-                              )
-                            : SvgPicture.asset(
-                                'images/Down.svg',
-                                color: AppColors.slate400,
-                                height: screenType == ScreenType.smallTablet ||
-                                        screenType == ScreenType.mobile ||
-                                        screenType == ScreenType.miniTablet
-                                    ? 20
-                                    : 24,
-                                width: screenType == ScreenType.smallTablet ||
-                                        screenType == ScreenType.mobile ||
-                                        screenType == ScreenType.miniTablet
-                                    ? 20
-                                    : 24,
-                              ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // SizedBox(
-              //   width: 12.09.w,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Container(
-              //         height: 30,
-              //         padding: const EdgeInsets.symmetric(
-              //           horizontal: 15,
-              //           vertical: 3,
-              //         ),
-              //         decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(8),
-              //           color: avgBgColor,
-              //         ),
-              //         child: Center(
-              //           child: AppTexts.bodyRegular(
-              //             text: '${widget.weekAvg}%',
-              //             fontColor: avgTextColor,
-              //             fontSize: 16,
-              //           ),
-              //         ),
-              //       ),
-              //
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
-          Visibility(
-            visible: isClicked,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 26,
-                ),
-                SizedBox(
-                  child: GridView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: AppDimensions.w20),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: screenType == ScreenType.desktop
-                          ? 3
-                          : screenType == ScreenType.mobile
-                              ? 1
-                              : 2,
-                      crossAxisSpacing: 16,
-                      mainAxisExtent: 118,
+                      ],
                     ),
-                    itemCount: 5,
-                    shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return AnimatedBuilder(
-                        animation: animation,
-                        builder: (context, child) {
-                          return ScaleTransition(scale: animation, child: child);
-                        },
-                        child: CourseWeekWidget(),
-                      );
-                    },
                   ),
-                )
+                ),
               ],
             ),
-          )
-        ],
+            Visibility(
+              visible: isClicked,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 26,
+                  ),
+                  SizedBox(
+                    child: GridView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(horizontal: AppDimensions.w20),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: screenType == ScreenType.desktop
+                            ? 3
+                            : screenType == ScreenType.mobile
+                                ? 1
+                                : 2,
+                        crossAxisSpacing: 16,
+                        mainAxisExtent: 118,
+                      ),
+                      itemCount: 5,
+                      shrinkWrap: true,
+                      // physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return AnimatedBuilder(
+                          animation: animation,
+                          builder: (context, child) {
+                            return ScaleTransition(scale: animation, child: child);
+                          },
+                          child: CourseWeekWidget(),
+                        );
+                      },
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

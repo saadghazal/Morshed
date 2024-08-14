@@ -1,22 +1,18 @@
 import 'package:abwaab_practice/blox/responsiveness_cubit/responsiveness_cubit.dart';
 import 'package:abwaab_practice/widgets/drawer_widgets/main_drawer_widget.dart';
-import 'package:abwaab_practice/widgets/drawer_widgets/material_performance_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../theme/app_colors.dart';
 import '../../theme/app_dimensions.dart';
-import '../../theme/app_texts.dart';
 import '../../widgets/appbar_widget/appbar_widget.dart';
 import '../../widgets/interaction_panel_widgets/interaction_panel_widget.dart';
 import '../../widgets/performance_panel_widgets/performance_panel_widget.dart';
 import '../../widgets/student_info_widgets/performance_final_score_widget.dart';
-import '../../widgets/student_info_widgets/slot_separator.dart';
-import '../../widgets/student_info_widgets/student_info_header.dart';
-import '../../widgets/student_info_widgets/student_info_slot.dart';
+
+import '../../widgets/student_info_widgets/student_info_widget.dart';
 import '../../widgets/weekly_schedules/weekly_schedules_widget.dart';
 
 class MorshedMainScreen extends StatefulWidget {
@@ -74,7 +70,7 @@ class _MorshedMainScreenState extends State<MorshedMainScreen> with TickerProvid
                                         SizedBox(
                                           width: 0.8.w,
                                         ),
-                                        Text(
+                                        const Text(
                                           'رجوع',
                                           style: TextStyle(
                                             color: AppColors.primaryBlue,
@@ -86,60 +82,7 @@ class _MorshedMainScreenState extends State<MorshedMainScreen> with TickerProvid
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    Container(
-                                      width: double.maxFinite,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 14,
-                                            width: double.maxFinite,
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(16),
-                                                topLeft: Radius.circular(16),
-                                              ),
-                                              color: AppColors.blue600,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-                                          StudentInfoHeader(),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'تاريخ الاشتراك:',
-                                            value: '12-05-2024',
-                                            multipleInfo: true,
-                                            infos: [
-                                              StudentInfo(title: 'الأسبوع:', value: '#2'),
-                                            ],
-                                          ),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'الشخصية:',
-                                            value: 'باسم',
-                                          ),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'أهم المواد:',
-                                            value:
-                                                'الرياضيات، اللغة الإنجليزية، العلوم، مهارات الاتصال',
-                                          ),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'الهدف:',
-                                            value: 'الحصول على العلامة الكاملة',
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    StudentInfoWidgetMobile(),
                                     SizedBox(
                                       height: 12,
                                     ),
@@ -203,60 +146,7 @@ class _MorshedMainScreenState extends State<MorshedMainScreen> with TickerProvid
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    Container(
-                                      width: 310,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 14,
-                                            width: double.maxFinite,
-                                            decoration: const BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(16),
-                                                topLeft: Radius.circular(16),
-                                              ),
-                                              color: AppColors.blue600,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-                                          StudentInfoHeader(),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'تاريخ الاشتراك:',
-                                            value: '12-05-2024',
-                                            multipleInfo: true,
-                                            infos: [
-                                              StudentInfo(title: 'الأسبوع:', value: '#2'),
-                                            ],
-                                          ),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'الشخصية:',
-                                            value: 'باسم',
-                                          ),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'أهم المواد:',
-                                            value:
-                                                'الرياضيات، اللغة الإنجليزية، العلوم، مهارات الاتصال',
-                                          ),
-                                          SlotSeparator(),
-                                          StudentInfoSlot(
-                                            title: 'الهدف:',
-                                            value: 'الحصول على العلامة الكاملة',
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    StudentInfoWidgetLarge(),
                                     SizedBox(
                                       height: 12,
                                     ),

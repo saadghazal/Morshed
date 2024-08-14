@@ -20,7 +20,7 @@ class PerformanceFinalScoreWidget extends StatelessWidget {
           ? double.maxFinite
           : 310,
       // width: screenType == ScreenType.desktop ? 21.52.w : 20.w,
-      padding: EdgeInsets.symmetric(vertical: 13, horizontal: 0.94.w),
+      padding: EdgeInsets.symmetric(vertical: 13, horizontal: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -52,7 +52,7 @@ class PerformanceFinalScoreWidget extends StatelessWidget {
         children: [
           AppTexts.titleBold(
             text: 'تحسن واضح',
-            fontSize: screenType == ScreenType.desktop ? 22 : 20,
+            fontSize: screenType == ScreenType.desktop ? 22 : 18,
             fontColor: AppColors.blue600,
           ),
           const SizedBox(

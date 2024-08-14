@@ -1,5 +1,5 @@
 import 'package:abwaab_practice/widgets/drawer_widgets/drawer_filter.dart';
-import 'package:abwaab_practice/widgets/drawer_widgets/material_subject_widget.dart';
+import 'package:abwaab_practice/widgets/drawer_widgets/material_subject_pdf_video_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -96,50 +96,6 @@ class _DailyActivityDrawerState extends State<DailyActivityDrawer> {
         const SizedBox(
           height: 16,
         ),
-        const MaterialSubjectWidget(
-          title: 'المجموعات والفترات 1',
-          isCompleted: true,
-          isDaily: true,
-          subtitle1: 'المتباينات الخطية',
-          subtitle2: 'المجموعات والفترات',
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        const MaterialSubjectWidget(
-          title: 'المجموعات والفترات 2',
-          isCompleted: true,
-          isDaily: true,
-          subtitle1: 'المتباينات الخطية',
-          subtitle2: 'المجموعات والفترات',
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        const MaterialSubjectWidget(
-          title: 'امتحان الدرس - المجموعات والفترات 1',
-          isCompleted: true,
-          isDaily: true,
-          subjectType: SubjectType.exam,
-          numberOfTries: 5,
-          subtitle1: 'المتباينات الخطية',
-          subtitle2: 'المجموعات والفترات',
-          results: [
-            Result(
-              mark: 13,
-              tryDate: '2024-03-20',
-            ),
-            Result(
-              mark: 17,
-              tryDate: '2024-03-19',
-            ),
-            Result(
-              mark: 7,
-              tryDate: '2024-03-15',
-            ),
-          ],
-          completedDate: '',
-        ),
         SizedBox(
           height: 36,
         ),
@@ -149,36 +105,6 @@ class _DailyActivityDrawerState extends State<DailyActivityDrawer> {
         ),
         SizedBox(
           height: 16,
-        ),
-        const MaterialSubjectWidget(
-          title: 'تمهيد لكتاب القواعد + المهارات وتعريف بالمادّة',
-          isCompleted: true,
-          isDaily: true,
-          subtitle1: 'التأسيس',
-          subtitle2: 'أساسيات اللغة العربية',
-        ),
-        SizedBox(
-          height: 12,
-        ),
-        const MaterialSubjectWidget(
-          title: 'تأسيس الجزء الأول',
-          subjectType: SubjectType.file,
-          isCompleted: true,
-          isDaily: true,
-          subtitle1: 'التأسيس',
-          subtitle2: 'أساسيات اللغة العربية',
-        ),
-        SizedBox(
-          height: 12,
-        ),
-        const MaterialSubjectWidget(
-          title: 'امتحان الوحدة - قصة وعِبرة',
-          subjectType: SubjectType.exam,
-          isCompleted: false,
-          isDaily: true,
-          subtitle1: 'قصة وعِبرة',
-          subtitle2: 'امتحان الوحدة-قصة وعِبرة',
-          numberOfSolvedQuestions: 10,
         ),
         SizedBox(
           height: 32,

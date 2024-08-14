@@ -28,15 +28,13 @@ class InteractionPanelFooter extends StatelessWidget {
             iconSize: 32,
           );
         } else if (state.screenType == ScreenType.largeTablet) {
-          print("Large");
           return buildRowOrColumn(
             isColumn: false,
             iconSize: 28,
             fontSize: 16,
-            dateSize: 20,
+            dateSize: 22,
           );
         } else if (state.screenType == ScreenType.smallTablet) {
-          print("Small");
           return buildRowOrColumn(
             isColumn: true,
             fontSize: 16,
@@ -47,9 +45,10 @@ class InteractionPanelFooter extends StatelessWidget {
         } else {
           return buildRowOrColumn(
             isColumn: true,
-            iconSize: 26,
+            iconSize: 28,
             fontSize: 16,
-            dateSize: 18,
+            dateSize: 20,
+            isInternalColumn: state.screenType == ScreenType.miniTablet ? false : true,
           );
         }
       },
@@ -66,7 +65,7 @@ class InteractionPanelFooter extends StatelessWidget {
   }) {
     return isColumn
         ? SizedBox(
-            height: 200,
+            height: isInternalColumn ? 230 : 200,
             child: Column(
               children: [
                 contentWidget(
@@ -74,6 +73,7 @@ class InteractionPanelFooter extends StatelessWidget {
                   fontSize,
                   isDesktop,
                   dateSize,
+                  isInternalColumn: isInternalColumn,
                   'images/calender.svg',
                   'عدد ايام التفاعل',
                   Directionality(
@@ -200,30 +200,31 @@ class InteractionPanelFooter extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 color: AppColors.slate50,
               ),
-              child: Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  SvgPicture.asset(
+                    iconPath,
+                    height: iconSize,
+                    width: iconSize,
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SvgPicture.asset(
-                        iconPath,
-                        height: iconSize,
-                        width: iconSize,
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
                       AppTexts.bodyMedium(
                         text: label,
                         fontColor: AppColors.slate900,
                         fontSize: fontSize,
                       ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      trailing,
                     ],
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  trailing,
                 ],
               ),
             ),

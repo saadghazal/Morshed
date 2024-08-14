@@ -48,14 +48,11 @@ class _CourseWeekWidgetState extends State<CourseWeekWidget> with TickerProvider
               children: [
                 SvgPicture.asset(
                   'images/arabic.svg',
-                  height: screenType == ScreenType.smallTablet ||
-                          screenType == ScreenType.mobile ||
-                          screenType == ScreenType.miniTablet
-                      ? 34
-                      : 44,
-                  width: screenType == ScreenType.smallTablet ||
-                          screenType == ScreenType.mobile ||
-                          screenType == ScreenType.miniTablet
+                  height:
+                      screenType == ScreenType.smallTablet || screenType == ScreenType.miniTablet
+                          ? 34
+                          : 44,
+                  width: screenType == ScreenType.smallTablet || screenType == ScreenType.miniTablet
                       ? 34
                       : 44,
                 ),
@@ -64,11 +61,10 @@ class _CourseWeekWidgetState extends State<CourseWeekWidget> with TickerProvider
                 ),
                 AppTexts.bodyRegular(
                   text: 'مهارات الاتصال',
-                  fontSize: screenType == ScreenType.smallTablet ||
-                          screenType == ScreenType.mobile ||
-                          screenType == ScreenType.miniTablet
-                      ? 14
-                      : 16,
+                  fontSize:
+                      screenType == ScreenType.smallTablet || screenType == ScreenType.miniTablet
+                          ? 14
+                          : 16,
                 ),
                 const Spacer(),
                 SvgPicture.asset(

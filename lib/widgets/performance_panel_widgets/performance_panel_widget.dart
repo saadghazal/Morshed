@@ -39,6 +39,8 @@ class _PerformancePanelWidgetState extends State<PerformancePanelWidget> {
         children: [
           AppTexts.titleBold(
             text: 'لوحة الأداء',
+            fontSize:
+                screenType == ScreenType.mobile || screenType == ScreenType.miniTablet ? 20 : 28,
           ),
           const SizedBox(
             height: 4,
@@ -46,22 +48,29 @@ class _PerformancePanelWidgetState extends State<PerformancePanelWidget> {
           Row(
             children: [
               AppTexts.bodyRegular(
-                text: 'لأخر 10 أيام:',
-                fontColor: AppColors.slate400,
-              ),
+                  text: 'لأخر 10 أيام:',
+                  fontColor: AppColors.slate400,
+                  fontSize: screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                      ? 14
+                      : 16),
               SizedBox(
                 width: 0.6.w,
               ),
               AppTexts.bodyRegular(
                 text: '2024-03-28 إلى 06-04-2024',
                 fontColor: AppColors.blue600,
+                fontSize: screenType == ScreenType.mobile || screenType == ScreenType.miniTablet
+                    ? 14
+                    : 16,
               ),
             ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          const MaterialsFilterWidget(),
+          screenType == ScreenType.mobile
+              ? SizedBox()
+              : SizedBox(
+                  height: 20,
+                ),
+          screenType == ScreenType.mobile ? SizedBox() : const MaterialsFilterWidget(),
           const SizedBox(
             height: 20,
           ),
@@ -73,7 +82,7 @@ class _PerformancePanelWidgetState extends State<PerformancePanelWidget> {
             height: 38,
           ),
           AppTexts.titleMedium(
-            text: 'لوحة مقارنة الأداء الإسبوعية',
+            text: 'مقارنة المعدل لكل اسبوع',
             fontSize: 20,
             fontColor: AppColors.slate900,
           ),
