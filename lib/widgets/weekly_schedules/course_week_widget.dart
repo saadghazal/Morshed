@@ -1,4 +1,6 @@
 import 'package:abwaab_practice/blox/responsiveness_cubit/responsiveness_cubit.dart';
+import 'package:abwaab_practice/widgets/drawer_widgets/material_performance_drawer.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,10 +27,23 @@ class _CourseWeekWidgetState extends State<CourseWeekWidget> with TickerProvider
 
     return InkWell(
       onTap: () {
-        context.read<DrawerCubit>().openDrawer(
-              context: context,
-              drawerType: DrawerType.performance,
-            );
+        if (screenType == ScreenType.mobile) {
+          context.read<DrawerCubit>().togglePopOut(context: context);
+          showModalBottomSheet(
+            context: context,
+            backgroundColor: Colors.white,
+            isScrollControlled: true,
+            builder: (context) => Directionality(
+              textDirection: TextDirection.rtl,
+              child: MaterialPerformanceDrawer(),
+            ),
+          );
+        } else {
+          context.read<DrawerCubit>().openDrawer(
+                context: context,
+                drawerType: DrawerType.performance,
+              );
+        }
       },
       child: Container(
         padding: EdgeInsets.all(12),

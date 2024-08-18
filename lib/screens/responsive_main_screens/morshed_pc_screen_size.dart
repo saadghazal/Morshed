@@ -38,158 +38,164 @@ class _MorshedMainScreenState extends State<MorshedMainScreen> with TickerProvid
   Widget build(BuildContext context) {
     return BlocBuilder<ResponsivenessCubit, ResponsivenessState>(
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBarWidget(
-            isAuthenticated: true,
-          ),
-          drawer: MainDrawerWidget(),
-          body: Directionality(
-            textDirection: TextDirection.rtl,
-            child:
-                state.screenType == ScreenType.miniTablet || state.screenType == ScreenType.mobile
-                    ? SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: state.screenType == ScreenType.mobile ? 16 : 40,
-                            vertical: 20,
-                          ),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: double.maxFinite,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'images/Android_Right.svg',
-                                          height: 24,
-                                          width: 24,
-                                        ),
-                                        SizedBox(
-                                          width: 0.8.w,
-                                        ),
-                                        const Text(
-                                          'رجوع',
-                                          style: TextStyle(
-                                            color: AppColors.primaryBlue,
-                                            fontSize: 16,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    StudentInfoWidgetMobile(),
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    PerformanceFinalScoreWidget(),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              const InteractionPanelWidget(),
-                              SizedBox(
-                                height: AppDimensions.h20,
-                              ),
-                              const PerformancePanelWidget(),
-                              SizedBox(
-                                height: AppDimensions.h20,
-                              ),
-                              WeeklySchedulesWidget(
-                                controller: scrollController,
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    : Flex(
-                        direction: Axis.horizontal,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+        return state.screenType == ScreenType.miniTablet || state.screenType == ScreenType.mobile
+            ? Scaffold(
+                appBar: AppBarWidget(
+                  isAuthenticated: true,
+                ),
+                drawer: state.screenType == ScreenType.miniTablet ? MainDrawerWidget() : null,
+                body: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: state.screenType == ScreenType.mobile ? 16 : 40,
+                        vertical: 20,
+                      ),
+                      child: Column(
                         children: [
-                          SingleChildScrollView(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: 20,
-                                right: 70,
-                                bottom: 20,
-                              ),
-                              child: SizedBox(
-                                width: 310,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          SizedBox(
+                            width: double.maxFinite,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          'images/Android_Right.svg',
-                                          height: 24,
-                                          width: 24,
-                                        ),
-                                        SizedBox(
-                                          width: 0.8.w,
-                                        ),
-                                        Text(
-                                          'رجوع',
-                                          style: TextStyle(
-                                            color: AppColors.primaryBlue,
-                                            fontSize: 16,
-                                          ),
-                                        )
-                                      ],
+                                    SvgPicture.asset(
+                                      'images/Android_Right.svg',
+                                      height: 24,
+                                      width: 24,
                                     ),
                                     SizedBox(
-                                      height: 20,
+                                      width: 0.8.w,
                                     ),
-                                    StudentInfoWidgetLarge(),
-                                    SizedBox(
-                                      height: 12,
-                                    ),
-                                    PerformanceFinalScoreWidget(),
+                                    const Text(
+                                      'رجوع',
+                                      style: TextStyle(
+                                        color: AppColors.primaryBlue,
+                                        fontSize: 16,
+                                      ),
+                                    )
                                   ],
                                 ),
-                              ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                StudentInfoWidgetMobile(),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                PerformanceFinalScoreWidget(),
+                              ],
                             ),
                           ),
                           SizedBox(
-                            width: 20,
+                            height: 20,
                           ),
-                          Flexible(
-                            child: SingleChildScrollView(
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  top: 63,
-                                  left: 70,
-                                  bottom: 20,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const InteractionPanelWidget(),
-                                    SizedBox(
-                                      height: AppDimensions.h20,
-                                    ),
-                                    const PerformancePanelWidget(),
-                                    SizedBox(
-                                      height: AppDimensions.h20,
-                                    ),
-                                    WeeklySchedulesWidget(
-                                      controller: scrollController,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                          const InteractionPanelWidget(),
+                          SizedBox(
+                            height: AppDimensions.h20,
+                          ),
+                          const PerformancePanelWidget(),
+                          SizedBox(
+                            height: AppDimensions.h20,
+                          ),
+                          WeeklySchedulesWidget(
+                            controller: scrollController,
                           ),
                         ],
                       ),
-          ),
-        );
+                    ),
+                  ),
+                ),
+              )
+            : Scaffold(
+                appBar: AppBarWidget(isAuthenticated: true),
+                drawer: MainDrawerWidget(),
+                body: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: 20,
+                            right: 70,
+                            bottom: 20,
+                          ),
+                          child: SizedBox(
+                            width: 310,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'images/Android_Right.svg',
+                                      height: 24,
+                                      width: 24,
+                                    ),
+                                    SizedBox(
+                                      width: 0.8.w,
+                                    ),
+                                    Text(
+                                      'رجوع',
+                                      style: TextStyle(
+                                        color: AppColors.primaryBlue,
+                                        fontSize: 16,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                StudentInfoWidgetLarge(),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                PerformanceFinalScoreWidget(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Flexible(
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: 63,
+                              left: 70,
+                              bottom: 20,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                const InteractionPanelWidget(),
+                                SizedBox(
+                                  height: AppDimensions.h20,
+                                ),
+                                const PerformancePanelWidget(),
+                                SizedBox(
+                                  height: AppDimensions.h20,
+                                ),
+                                WeeklySchedulesWidget(
+                                  controller: scrollController,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
       },
     );
   }

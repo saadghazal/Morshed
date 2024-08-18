@@ -1,5 +1,6 @@
 import 'package:abwaab_practice/blox/drawer_cubit/drawer_cubit.dart';
 import 'package:abwaab_practice/blox/responsiveness_cubit/responsiveness_cubit.dart';
+import 'package:abwaab_practice/widgets/drawer_widgets/material_subject_exam_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,32 +22,178 @@ class MaterialPerformanceDrawer extends StatefulWidget {
 }
 
 class _MaterialPerformanceDrawerState extends State<MaterialPerformanceDrawer> {
+  double modalHeight = 60.h;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DrawerHeader(),
-        const SizedBox(
-          height: 32,
-        ),
-        Container(
-          height: 1,
-          width: double.maxFinite,
-          color: AppColors.slate300,
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-        const DrawerFilter(),
-        const SizedBox(
-          height: 32,
-        ),
-        MaterialSubjectPdfVideoWidget(),
-        const SizedBox(
-          height: 32,
-        ),
-      ],
+    return BlocBuilder<ResponsivenessCubit, ResponsivenessState>(
+      builder: (context, state) {
+        if (state.screenType == ScreenType.mobile) {
+          return Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: SizedBox(
+              height: modalHeight,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DrawerHeader(),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Container(
+                      height: 1,
+                      width: double.maxFinite,
+                      color: AppColors.slate300,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const DrawerFilter(),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Column(
+                      children: [
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectExamWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        MaterialSubjectPdfVideoWidget(),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        } else {
+          return Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DrawerHeader(),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Container(
+                    height: 1,
+                    width: double.maxFinite,
+                    color: AppColors.slate300,
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  const DrawerFilter(),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectExamWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MaterialSubjectPdfVideoWidget(),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }
@@ -67,7 +214,6 @@ class DrawerHeader extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: 30,
                   right: 20,
                   left: 20,
                 ),
@@ -174,15 +320,14 @@ class DrawerHeader extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                top: 30,
-                right: AppDimensions.w20,
-                left: AppDimensions.w20,
+                right: 16,
+                left: 16,
               ),
               child: Row(
                 children: [
                   InkWell(
                     onTap: () {
-                      context.read<DrawerCubit>().closeDrawer(context: context);
+                      Navigator.pop(context);
                     },
                     child: Ink(child: SvgPicture.asset('images/Close.svg')),
                   ),

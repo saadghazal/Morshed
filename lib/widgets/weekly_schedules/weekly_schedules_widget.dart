@@ -1,3 +1,4 @@
+import 'package:abwaab_practice/blox/drawer_cubit/drawer_cubit.dart';
 import 'package:abwaab_practice/blox/responsiveness_cubit/responsiveness_cubit.dart';
 import 'package:abwaab_practice/widgets/weekly_schedules/week_slot.dart';
 import 'package:flutter/material.dart';
@@ -209,7 +210,7 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
           ),
         ),
         SizedBox(
-          width: AppDimensions.w12,
+          width: 12,
         ),
         Row(
           children: List.generate(
@@ -251,7 +252,7 @@ class _WeeklySchedulesWidgetState extends State<WeeklySchedulesWidget> {
                     ),
                   ),
                 );
-              } else if (index > 2) {
+              } else if (index > 1) {
                 return SizedBox();
               }
               return Container(

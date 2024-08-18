@@ -37,7 +37,7 @@ class _ResponsiveScreenState extends State<ResponsiveScreen> {
               context.read<ResponsivenessCubit>().setDeviceType(ScreenType.miniTablet);
               return MorshedMainScreen();
             }
-            print("Mobile");
+
             context.read<ResponsivenessCubit>().setDeviceType(ScreenType.mobile);
             return MorshedMainScreen();
           }

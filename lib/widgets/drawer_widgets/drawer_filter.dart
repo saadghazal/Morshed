@@ -1,5 +1,7 @@
+import 'package:abwaab_practice/blox/responsiveness_cubit/responsiveness_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../theme/app_colors.dart';
 import '../../theme/app_dimensions.dart';
@@ -25,39 +27,51 @@ class _DrawerFilterState extends State<DrawerFilter> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimensions.w12 + AppDimensions.w20,
-      ),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () => selectFilter(0),
-            child: filterWidget(
-              label: 'المواد المجدولة',
-              isSelected: selectedIndex == 0,
-            ),
+    return BlocBuilder<ResponsivenessCubit, ResponsivenessState>(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal:
+                state.screenType == ScreenType.mobile || state.screenType == ScreenType.miniTablet
+                    ? 16
+                    : 32,
           ),
-          SizedBox(
-            width: AppDimensions.w12,
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () => selectFilter(0),
+                child: filterWidget(
+                  label: 'المواد المجدولة',
+                  isSelected: selectedIndex == 0,
+                  isMobile: state.screenType == ScreenType.mobile ||
+                      state.screenType == ScreenType.miniTablet,
+                ),
+              ),
+              SizedBox(
+                width: AppDimensions.w12,
+              ),
+              GestureDetector(
+                onTap: () => selectFilter(1),
+                child: filterWidget(
+                  label: 'التفاعلات خارج الجدول',
+                  isSelected: selectedIndex == 1,
+                  isMobile: state.screenType == ScreenType.mobile ||
+                      state.screenType == ScreenType.miniTablet,
+                ),
+              ),
+            ],
           ),
-          GestureDetector(
-            onTap: () => selectFilter(1),
-            child: filterWidget(
-              label: 'التفاعلات خارج الجدول',
-              isSelected: selectedIndex == 1,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  Container filterWidget({required String label, required bool isSelected}) {
+  Container filterWidget(
+      {required String label, required bool isSelected, required bool isMobile}) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: AppDimensions.w20,
-        vertical: 10,
+        horizontal: 20,
+        vertical: isMobile ? 5 : 10,
       ),
       decoration: BoxDecoration(
         color: isSelected ? AppColors.blue600 : AppColors.slate50,

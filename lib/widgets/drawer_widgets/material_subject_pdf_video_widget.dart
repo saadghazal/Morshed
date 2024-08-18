@@ -94,7 +94,7 @@ class MaterialSubjectPdfVideoWidget extends StatelessWidget {
           );
         } else {
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: 32),
+            margin: EdgeInsets.symmetric(horizontal: 16),
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
